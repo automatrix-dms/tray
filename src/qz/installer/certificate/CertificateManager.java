@@ -318,8 +318,6 @@ public class CertificateManager {
         if (keyPair.getType() == SSL) {
             props.putIfAbsent(String.format("%s.host", keyPair.propsPrefix()), DEFAULT_HOST_SCOPE);
         }
-
-
         return props;
     }
 

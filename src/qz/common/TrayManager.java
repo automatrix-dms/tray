@@ -56,6 +56,7 @@ public class TrayManager {
     private ConfirmDialog confirmDialog;
     private GatewayDialog gatewayDialog;
     private AboutDialog aboutDialog;
+    private DmsSettingDialog dmsSettingDialog;
     private LogDialog logDialog;
     private SiteManagerDialog sitesDialog;
     private ArrayList<Component> componentList;
@@ -317,7 +318,14 @@ public class TrayManager {
         JMenuItem exitItem = new JMenuItem("Exit", iconCache.getIcon(IconCache.Icon.EXIT_ICON));
         exitItem.addActionListener(exitListener);
 
+        // Custom Code for printing client Automatrix
+        JMenuItem dmsMenu = new JMenuItem("DMS Settings", iconCache.getIcon(IconCache.Icon.SETTINGS_ICON));
+        dmsMenu.setMnemonic(KeyEvent.VK_D);
+        dmsMenu.addActionListener(dmsSettingListener);
+        dmsSettingDialog = new DmsSettingDialog(null, "DMS Settings", iconCache);
+        componentList.add(dmsSettingDialog);
         popup.add(advancedMenu);
+        popup.add(dmsMenu);
         popup.add(reloadItem);
         popup.add(aboutItem);
         popup.add(startupItem);
@@ -422,6 +430,12 @@ public class TrayManager {
         }
     };
 
+    private final ActionListener dmsSettingListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dmsSettingDialog.setVisible(true);
+        }
+    };
     private final ActionListener exitListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             boolean showAllNotifications = prefs.getBoolean(Constants.PREFS_NOTIFICATIONS, false);

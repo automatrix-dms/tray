@@ -92,4 +92,5 @@ public class Constants {
     public static final Integer[] WSS_PORTS = {8181, 8282, 8383, 8484};
     public static final Integer[] WS_PORTS = {8182, 8283, 8384, 8485};
     public static final Integer[] CUPS_RSS_PORTS = {8586, 8687, 8788, 8889};
+
 }
