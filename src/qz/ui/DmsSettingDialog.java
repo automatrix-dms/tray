@@ -9,6 +9,7 @@ import qz.ui.BasicDialog;
 import qz.ui.Themeable;
 import qz.ui.component.EmLabel;
 import qz.ui.component.IconCache;
+import qz.utils.DmsWebSocketClient;
 import qz.utils.GraphQLUtilities;
 import qz.utils.MiscUtilities;
 
@@ -19,8 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 
-import static qz.common.DmsContants.DMS_GRAPHQL_URL;
-import static qz.common.DmsContants.TOKEN_ID_KEY;
+import static qz.common.DmsContants.*;
 
 
 public class DmsSettingDialog extends JDialog {
@@ -28,6 +28,7 @@ public class DmsSettingDialog extends JDialog {
     private static final Logger log = LoggerFactory.getLogger(DmsSettingDialog.class);
     private final static String TOKEN_ACCESS_ID = "D3VT0K3N2YhWbUZ1WlhOellWOU53Nmx1WkdWNjM5NTg3";
     private final static String GRAPHQL_URL = "https://dms-graphql-task-35571-windowstickers.envoyproxy.automatrix.com/graphql";
+    private final static String WSS_URL = "wss://dms-graphql-task-35571-windowstickers.envoyproxy.automatrix.com/graphql";
     private JTextField txtTokenIdentifier;
     private final IconCache iconCache;
     JLabel errorTxt = new EmLabel("", 1);
@@ -43,6 +44,7 @@ public class DmsSettingDialog extends JDialog {
         // Logic for create property and reload it
         MiscUtilities.writeDmsProperty(TOKEN_ID_KEY, TOKEN_ACCESS_ID, false);
         MiscUtilities.writeDmsProperty(DMS_GRAPHQL_URL, GRAPHQL_URL, false);
+        MiscUtilities.writeDmsProperty(DMS_WSS_URL, WSS_URL, false);
         MiscUtilities.forceLoadProps();
 
         JPanel infoPanel = new JPanel();
@@ -106,14 +108,15 @@ public class DmsSettingDialog extends JDialog {
                 //    showErrorMessage("This field can't be empty");
                 //if (pinValue.length() != 6)
                 //    showErrorMessage("Please insert the 6 digits");
-                //String bearerToken = "AZoIKIoR2YhWbUZ1WlhOellWOU53Nmx1WkdWNjM5NTg3";
+                String bearerToken = "b/B/VbxE2og2ZTg1YzZhZS1mOTUwLTRhMzMtYTFhOC02NTY1ZjRkZjVmOWUzOTU4Nw==";
                 //String query = "{\n" +
                 //        "  getPrinters (lotId: 3) {\n" +
                 //        "    name id \n" +
                 //        "  }\n" +
                 //        "}";
                 //JSONObject responseJson = GraphQLUtilities.requestGraphQL(query, bearerToken);
-                requestForNewAuthToken(txtTokenIdentifier.getText());
+                DmsWebSocketClient.testWebSocket("ws://localhost:4000/graphql", bearerToken);
+                //requestForNewAuthToken(txtTokenIdentifier.getText());
                 //log.info("response JSON " + responseJson);
                 //setVisible(false);
             }
