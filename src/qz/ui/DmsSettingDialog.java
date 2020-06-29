@@ -1,5 +1,9 @@
 package qz.ui;
 
+import com.apollographql.apollo.ApolloClient;
+import com.apollographql.apollo.ApolloSubscriptionCall;
+import com.apollographql.apollo.internal.RealApolloSubscriptionCall;
+import com.apollographql.apollo.internal.subscription.SubscriptionManager;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,7 @@ import qz.ui.component.IconCache;
 import qz.utils.DmsWebSocketClient;
 import qz.utils.GraphQLUtilities;
 import qz.utils.MiscUtilities;
+import redis.clients.jedis.Jedis;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -115,6 +120,9 @@ public class DmsSettingDialog extends JDialog {
                 //        "  }\n" +
                 //        "}";
                 //JSONObject responseJson = GraphQLUtilities.requestGraphQL(query, bearerToken);
+                //ApolloClient apolloClient = ApolloClient.builder().serverUrl("http://localhost:4000/graphql").build();
+                //apolloClient.subscribe(new Su)
+                log.info("Lets try this");
                 DmsWebSocketClient.testWebSocket("ws://localhost:4000/graphql", bearerToken);
                 //requestForNewAuthToken(txtTokenIdentifier.getText());
                 //log.info("response JSON " + responseJson);

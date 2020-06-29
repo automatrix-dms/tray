@@ -34,5 +34,7 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="true" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jedis-3.3.0" level="project" />
+    <orderEntry type="library" name="apollo-runtime-2.1.0" level="project" />
   </component>
 </module>

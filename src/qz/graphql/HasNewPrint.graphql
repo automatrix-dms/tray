@@ -1,0 +1,15 @@
+Subscription hasNewPrint($lotId: Int!, $printersName: [String!]!, $clientId: String!) {
+    hasNewPrint(lotId: $lotId, printersName: $printersName, clientId: $clientId) {
+        _id: String
+        companyCode: Int
+        stockNumber: Int
+        warrantyId: Int
+        date: Date
+        formName: String
+        printerId: Int
+        printerName: String
+        lotId: Int
+        url: String
+        status: String
+    }
+}

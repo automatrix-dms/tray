@@ -20,6 +20,7 @@ public class DmsWebSocketClient {
     private static final Logger log = LoggerFactory.getLogger(DmsWebSocketClient.class);
     private final CountDownLatch closeLatch;
     private Session session;
+
     //private ApolloClient apolloClient = new ApolloClient.builder();
 
     public DmsWebSocketClient () {
@@ -72,6 +73,7 @@ public class DmsWebSocketClient {
     }
 
     public static void testWebSocket(String wssUrl, String token) {
+        log.info("HERE");
         SslContextFactory sslContextFactory = new SslContextFactory();
         sslContextFactory.setTrustAll(Boolean.TRUE);
         WebSocketClient wsClient = new WebSocketClient(sslContextFactory);
@@ -80,20 +82,14 @@ public class DmsWebSocketClient {
             wsClient.setMaxIdleTimeout(Long.MAX_VALUE);
             wsClient.start();
             URI wsUri = new URI(wssUrl);
-            ClientUpgradeRequest request = new ClientUpgradeRequest();
-            request.setHeader("Authorization", "Bearer " + token);
-            Session session = wsClient.connect(socket, wsUri, request).get();
+            //ClientUpgradeRequest request = new ClientUpgradeRequest();
+            //request.setHeader("Authorization", "Bearer " + token);
+            Session session = wsClient.connect(socket, wsUri).get();
             log.info("Testing " + session.isOpen());
         }
         catch(Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                wsClient.stop();
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
+            log.error(e.getMessage());
         }
     }
 }
